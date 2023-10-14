@@ -1,2 +1,4 @@
 rootProject.name = 'java-spring-practice'
 include 'oop-practice'
+include 'spring-board-practice'
+
