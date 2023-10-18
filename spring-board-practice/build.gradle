@@ -9,9 +9,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //datarest(간단하게 RestAPI 생성), hal explorer - (간단하게 우리가 만든 api를 테스트)
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    runtimeOnly 'org.springframework.data:spring-data-rest-hal-explorer'
+
+    //db
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -38,11 +38,9 @@ spring:
         default_batch_fetch_size: 100 #Jpa에서 연관관계까 매핑되어있는 쿼리를 한번에 bulk로 select 해주는 기능 (join)
   h2.console.enabled: false #inmemory h2 의 console false
   sql.init.mode: always # data.sql을 언제 작동시킬것인가에 대한 룰
-
-  #data:
-  #  rest:
-  #    detection-strategy: annotated
-  #    base-path: /api
+  data.rest: #spring data rest로 자동 생성되는 엔드포인트를 커스터마이징
+      detection-strategy: annotated # 우리가 가지고 있는 Repository를 어떤 기준으로 API로 생성해 노출시킬것인가 - @RepositoryRestResource
+      base-path: /api # 기본 엔드포인트를 /api로 변경 http://localhost:8080/api으로 HAL EXPLOLER로 테스트 가능
 
 ---
 
@@ -53,4 +51,5 @@ spring:
     driver-class-name: org.h2.Driver
   sql.init.mode: always
   test.database.replace: none # @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) 전역 Test 사용 @ActiveProfile("testdb") 사용시 Added connection conn0: url=jdbc:h2:mem:board user=TEST 작동
+
 
