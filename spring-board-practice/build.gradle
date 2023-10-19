@@ -4,6 +4,8 @@ configurations {
     }
 }
 
+print(dependencyManagement.importedProperties['querydsl.version'])
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -14,10 +16,57 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     runtimeOnly 'org.springframework.data:spring-data-rest-hal-explorer'
 
+    //Querydsl 설정
+    implementation "com.querydsl:querydsl-jpa:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"//Springboot3부터 버전 뒤에 뒤에 jakarta를 붙여야
+    implementation 'com.querydsl:querydsl-core'
+    implementation 'com.querydsl:querydsl-collections'
+    annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")// java.lang.NoClassDefFoundError: javax.annotation.Generated 대응 코드
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")// java.lang.NoClassDefFoundError: javax.annotation.Entity 대응 코드
+
     //db
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+/*
+
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+
+tasks.withType(JavaCompile) {
+    options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
+}
+
+//gradle clean 시에 QClass 디렉토리 삭제
+clean.doLast {
+    file(querydslDir).deleteDir()
+}
+*/
+
+//Querydsl 설정 generated 폴더 생
+//gradle과 ide의 QClass Build시에 생성 위치를 동일하게 하기 위해
+def generated = "src/main/generated/querydsl"
+
+//Querydsl java source set에 QClass 파일을 추가
+tasks.withType(JavaCompile) {
+    options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+//Querydsl QClass 파일 생성 위치를 지정
+sourceSets {
+    main.java.srcDirs += [generated]
+}
+
+//gradle clean 시에 QClass 디렉토리 삭제
+clean.doLast{
+    delete file (generated)
 }
