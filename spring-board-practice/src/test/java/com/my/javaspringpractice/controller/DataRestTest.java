@@ -1,5 +1,6 @@
 package com.my.javaspringpractice.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled("Data REST 통합 테스트는 불필요하므로 제외한다.")
 @DisplayName("Data REST - API Test")
 @Transactional//spring Transactional (data rest가 hibernate쿼리를 이용해서 사용하기 때문에 DB에 영향이 간다.)
 @AutoConfigureMockMvc //Repository에 선언되었기 때문에 @WebMvcTest를 사용할 수 없다.
