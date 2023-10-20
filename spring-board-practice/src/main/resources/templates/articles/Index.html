@@ -6,16 +6,7 @@
 </head>
 <body>
 
-헤더
-<header>
-    <h1>게시판</h1>
-    <nav>
-        <ul>
-            <li><a href="/articles">게시판</a></li>
-            <li><a href="/articles/create">게시글 작성</a></li>
-        </ul>
-    </nav>
-</header>
+<header th:replace="~{header :: header}"></header>
 
 <main>
     <form>
@@ -83,10 +74,8 @@
         </table>
     </nav>
 </main>
-<footer>
-    <hr>
-    footer 삽입부
-</footer>
+
+<footer th:replace="footer :: footer"></footer>
 
 </body>
 </html>
