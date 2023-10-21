@@ -41,7 +41,8 @@ spring:
   data.rest: #spring data rest로 자동 생성되는 엔드포인트를 커스터마이징
       detection-strategy: annotated # 우리가 가지고 있는 Repository를 어떤 기준으로 API로 생성해 노출시킬것인가 - @RepositoryRestResource
       base-path: /api # 기본 엔드포인트를 /api로 변경 http://localhost:8080/api으로 HAL EXPLOLER로 테스트 가능
-
+  thymeleaf3:
+    decoupled-logic: true #thymeleaf파일 분리를 위해 decoupled-logic를 true로 해줘야한다.
 ---
 
 spring:
