@@ -83,3 +83,7 @@ git rm -r --cached .
 git add .
 ~~~
 
+## View 그리기
+
+게시판 리스트 참고
+https://bootdey.com/snippets/view/General-Search-Results
