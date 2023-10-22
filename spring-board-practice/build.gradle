@@ -26,6 +26,11 @@ dependencies {
 
     //thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    //thymeleaf security
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
 
     //db
     runtimeOnly 'com.h2database:h2'
