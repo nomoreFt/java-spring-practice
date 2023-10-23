@@ -5,14 +5,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -88,4 +85,21 @@ public class DataRestTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/hal+json"));
     }
+
+
+    @DisplayName("[api] 회원 관련 API 는 일체 제공하지 않는다.")
+    @Test
+    void givenNothing_whenRequestingUserAccounts_thenThrowsException() throws Exception {
+        // Given
+
+        // When & Then
+        mockMvc.perform(get("/api/userAccounts")).andExpect(status().isForbidden());
+        mockMvc.perform(post("/api/userAccounts")).andExpect(status().isForbidden());
+        mockMvc.perform(put("/api/userAccounts")).andExpect(status().isForbidden());
+        mockMvc.perform(patch("/api/userAccounts")).andExpect(status().isForbidden());
+        mockMvc.perform(delete("/api/userAccounts")).andExpect(status().isForbidden());
+        mockMvc.perform(head("/api/userAccounts")).andExpect(status().isForbidden());
+    }
 }
+
+
