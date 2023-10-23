@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,gradle,intellij+all,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,gradle,intellij+all,windows,macos
 
+### JPA Buddy
+.jpb/
+
 ### Querydsl QClass
 spring-board-practice/src/main/generated
 
