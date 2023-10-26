@@ -5,6 +5,8 @@ import com.my.javaspringpractice.domain.QArticle;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.core.types.dsl.TemporalExpression;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
@@ -18,6 +20,7 @@ public interface ArticleRepository extends
         QuerydslPredicateExecutor<Article>,//기본적으로 Entity 안에 있는 검색기능을 추가해준다.
         QuerydslBinderCustomizer<QArticle> {
 
+        Page<Article> findByTitle(String title, Pageable pAgeable);
         @Override
         default void customize(QuerydslBindings bindings, QArticle root){
                 bindings.excludeUnlistedProperties(true);//기본적으로 제공되는 기능을 제외한다.

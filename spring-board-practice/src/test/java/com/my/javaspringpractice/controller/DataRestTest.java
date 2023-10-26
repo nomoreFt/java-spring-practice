@@ -93,12 +93,12 @@ public class DataRestTest {
         // Given
 
         // When & Then
-        mockMvc.perform(get("/api/userAccounts")).andExpect(status().isForbidden());
-        mockMvc.perform(post("/api/userAccounts")).andExpect(status().isForbidden());
-        mockMvc.perform(put("/api/userAccounts")).andExpect(status().isForbidden());
-        mockMvc.perform(patch("/api/userAccounts")).andExpect(status().isForbidden());
-        mockMvc.perform(delete("/api/userAccounts")).andExpect(status().isForbidden());
-        mockMvc.perform(head("/api/userAccounts")).andExpect(status().isForbidden());
+        mockMvc.perform(get("/api/userAccounts")).andExpect(status().isNotFound());
+        mockMvc.perform(post("/api/userAccounts")).andExpect(status().isNotFound());
+        mockMvc.perform(put("/api/userAccounts")).andExpect(status().isNotFound());
+        mockMvc.perform(patch("/api/userAccounts")).andExpect(status().isNotFound());
+        mockMvc.perform(delete("/api/userAccounts")).andExpect(status().isNotFound());
+        mockMvc.perform(head("/api/userAccounts")).andExpect(status().isNotFound());
     }
 }
 

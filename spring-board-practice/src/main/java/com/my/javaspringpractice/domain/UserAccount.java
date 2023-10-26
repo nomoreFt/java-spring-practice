@@ -1,10 +1,12 @@
 package com.my.javaspringpractice.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter
 @Table(name = "user_account", indexes = {
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
@@ -34,15 +36,15 @@ public class UserAccount extends AuditingFields{
     private String nickname;
 
     @Setter
-    @Column(nullable = false)
     private String memo;
 
     protected UserAccount() {
     }
 
-    private UserAccount(String userId, String userPassword, String nickname, String memo) {
+    private UserAccount(String userId, String userPassword,String mail, String nickname, String memo) {
         this.userId = userId;
         this.userPassword = userPassword;
+        this.email = mail;
         this.nickname = nickname;
         this.memo = memo;
     }
@@ -60,8 +62,8 @@ public class UserAccount extends AuditingFields{
         return Objects.hash(userId);
     }
 
-    public static UserAccount of(String userId, String userPassword, String nickname, String memo) {
-        return new UserAccount(userId, userPassword, nickname, memo);
+    public static UserAccount of(String userId, String userPassword,String email, String nickname, String memo) {
+        return new UserAccount(userId, userPassword, email, nickname, memo);
     }
 
 }

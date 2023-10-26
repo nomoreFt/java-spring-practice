@@ -1,5 +1,6 @@
 package com.my.javaspringpractice.service;
 
+import com.my.javaspringpractice.domain.ArticleComment;
 import com.my.javaspringpractice.dto.ArticleCommentDto;
 import com.my.javaspringpractice.repository.ArticleCommentRepository;
 import com.my.javaspringpractice.repository.ArticleRepository;
@@ -18,11 +19,22 @@ public class ArticleCommentService {
     private final  ArticleRepository articleRepository;
 
     @Transactional(readOnly = true)
-    public List<ArticleCommentDto> searchArticleComment(long articleId) {
-        return List.of();
+    public List<ArticleCommentDto> searchArticleComments(long articleId) {
+        return articleCommentRepository.findByArticle_Id(articleId)
+                .stream()
+                .map(ArticleCommentDto::from)
+                .toList();
     }
 
     public void saveArticleComment(ArticleCommentDto dto) {
+
+    }
+
+    public void updateArticleComment(ArticleCommentDto dto) {
+
+    }
+
+    public void deleteArticleComment(Long articleCommentId) {
 
     }
 }
