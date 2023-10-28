@@ -1,6 +1,7 @@
 package com.my.javaspringpractice.controller;
 
 import com.my.javaspringpractice.config.SecurityConfig;
+import com.my.javaspringpractice.domain.type.SearchType;
 import com.my.javaspringpractice.dto.ArticleWithCommentsDto;
 import com.my.javaspringpractice.dto.UserAccountDto;
 import com.my.javaspringpractice.service.ArticleService;
@@ -102,19 +103,43 @@ class ArticleControllerTest {
         then(articleService).should().getArticle(articleId);
     }
 
+    @DisplayName("[view] [GET] 게시글 리스트 (게시판) 페이지 - 검색어와 함께 호출")
+    @Test
+    void givenSearchKeyword_whenSearchingArticleView_thenReturnsArticlesView() throws Exception {
+        //given
+        SearchType searchType = SearchType.TITLE;
+        String searchValue = "title";
+        given(articleService.searchArticles(eq(searchType), eq(searchValue), any(Pageable.class))).willReturn(Page.empty());
+        given(paginationService.getPaginationBarNumbers(anyInt(), anyInt())).willReturn(List.of(0, 1, 2, 3, 4));
+
+        //when & then
+        mockMvc.perform(get("/articles")
+                        .queryParam("searchType", searchType.name())
+                        .queryParam("searchValue", searchValue))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/index"))
+                .andExpect(model().attributeExists("articles"))
+                .andExpect(model().attributeExists("searchTypes"));
+
+        then(articleService).should().searchArticles(eq(searchType), eq(searchValue), any(Pageable.class));
+        then(paginationService).should().getPaginationBarNumbers(anyInt(), anyInt());
+
+    }
+
     @Disabled
     @DisplayName("[view] [GET] 게시글 검색 전용 페이지 - 정상 호출")
     @Test
-    void givenNothing_whenRequestingArticlesSearchView_thenReturnArticlesSearchView() throws Exception {
+    public void givenNothing_whenRequestingArticlesSearchView_thenReturnArticleSearchView() throws Exception {
         // given
 
         // when & then
         mockMvc.perform(get("/articles/search"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("articles/search"))
                 .andExpect(model().attributeExists("articles/search"));
     }
+
 
     @Disabled
     @DisplayName("[view] [GET] 게시글 해시태그 검색 페이지 - 정상 호출")
@@ -161,30 +186,5 @@ class ArticleControllerTest {
     }
 
 
-    @Disabled
-    @DisplayName("[view] [GET] 게시글 검색 전용 페이지 - 정상 호출")
-    @Test
-    public void givenNothing_whenRequestingArticlesSearchView_thenReturnArticleSearchView() throws Exception {
-        // given
 
-        // when & then
-        mockMvc.perform(get("/articles/search"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles/search"));
-    }
-
-
-    @Disabled
-    @DisplayName("[view] [GET] 게시글 해시태그 검색 페이지 - 정상 호출")
-    @Test
-    public void givenNothing_whenRequestingArticlesHashTagView_thenReturnArticleHashTagView() throws Exception {
-        // given
-
-        // when & then
-        mockMvc.perform(get("/articles/search-hashtag"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles/search-hashtag"));
-    }
 }
