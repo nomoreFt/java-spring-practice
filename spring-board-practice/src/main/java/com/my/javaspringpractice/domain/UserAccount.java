@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @Getter
 @Table(name = "user_account", indexes = {
+        @Index(columnList = "userId", unique = true),
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
