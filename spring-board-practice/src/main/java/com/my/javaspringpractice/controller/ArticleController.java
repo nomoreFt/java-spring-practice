@@ -1,10 +1,7 @@
 package com.my.javaspringpractice.controller;
 
 import com.my.javaspringpractice.domain.type.SearchType;
-import com.my.javaspringpractice.dto.ArticleDto;
-import com.my.javaspringpractice.dto.ArticleResponse;
-import com.my.javaspringpractice.dto.ArticleWithCommentsDto;
-import com.my.javaspringpractice.dto.ArticleWithCommentsResponse;
+import com.my.javaspringpractice.dto.*;
 import com.my.javaspringpractice.service.ArticleService;
 import com.my.javaspringpractice.service.PaginationService;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,7 +41,7 @@ public class ArticleController {
 
     @GetMapping("/{articleId}")
     public String article(@PathVariable Long articleId, ModelMap map) {
-        ArticleWithCommentsDto dto = articleService.getArticle(articleId);
+        ArticleWithCommentsDto dto = articleService.getArticleWithComments(articleId);
         ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(dto);
         map.addAttribute("article", article);
         map.addAttribute("articleComments", article.articleCommentsResponses());
@@ -72,4 +66,6 @@ public class ArticleController {
 
         return "articles/search-hashtag";
     }
+
+
 }
