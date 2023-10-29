@@ -2,6 +2,7 @@ package com.my.javaspringpractice.repository;
 
 import com.my.javaspringpractice.domain.Article;
 import com.my.javaspringpractice.domain.QArticle;
+import com.my.javaspringpractice.repository.querydsl.ArticleRepositoryCustom;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.domain.Page;
@@ -12,9 +13,12 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import java.util.List;
+
 @RepositoryRestResource
 public interface ArticleRepository extends
         JpaRepository<Article, Long>,
+        ArticleRepositoryCustom,
         QuerydslPredicateExecutor<Article>,//기본적으로 Entity 안에 있는 검색기능을 추가해준다.
         QuerydslBinderCustomizer<QArticle> {
 
@@ -23,6 +27,7 @@ public interface ArticleRepository extends
         Page<Article> findByUserAccount_UserIdContaining(String userId, Pageable pageable);
         Page<Article> findByUserAccount_NicknameContaining(String nickname, Pageable pageable);
         Page<Article> findByHashtag(String hashtag, Pageable pAgeable);
+
         @Override
         default void customize(QuerydslBindings bindings, QArticle root){
                 bindings.excludeUnlistedProperties(true);//기본적으로 제공되는 기능을 제외한다.
