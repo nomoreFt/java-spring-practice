@@ -13,6 +13,23 @@
 * JPA Buddy Plugin - JPA Entity, DTO 편하게 생성
 * https://www.mockaroo.com/ - DB Test시에 예시 데이터 빠르게 생성
 
+---
+
+## @MappedSuperClass
+
+
+* **공통 필드 또는 메소드**: 여러 Entity 클래스가 공통으로 가지는 필드나 메소드가 있다면, 이를 부모 클래스에 정의하고 @MappedSuperclass를 사용하여 이 클래스를 Entity 클래스의 공통 부분으로 사용할 수 있습니다.
+
+* **상속 관계**: Entity 클래스 간의 상속 관계에서 부모 클래스가 데이터베이스 테이블으로 매핑되지 않아야 할 경우 @MappedSuperclass를 사용합니다. 즉, 부모 클래스는 테이블을 가지지 않고 하위 클래스에서 테이블을 가지도록 하려면 @MappedSuperclass를 붙입니다.
+
+## @ManyToOne(optional = false)
+
+@ManyToOne 애너테이션에 사용되는 optional 속성은 연관된 객체가 반드시 존재해야 하는지 여부를 나타냅니다.
+
+* optional = true (기본값): 연관된 객체가 없어도 된다는 의미입니다. 즉, null이 허용됩니다.
+* optional = false: 연관된 객체가 반드시 존재해야 함을 의미합니다. null을 허용하지 않습니다.
+이 속성은 데이터베이스 스키마에 NOT NULL 제약 조건을 생성하고, JPA가 실행하는 SQL에 영향을 줄 수 있습니다. 또한, optional = false로 설정된 필드에 null 값을 넣으려고 하면, JPA는 예외를 발생시킵니다.
+
 ## SpringBoot3 QueryDsl Build.gradle
 
 ```groovy

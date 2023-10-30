@@ -3,67 +3,38 @@ package com.my.javaspringpractice.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import java.util.Objects;
 
 @Getter
-@Table(name = "user_account", indexes = {
-        @Index(columnList = "userId", unique = true),
-        @Index(columnList = "email", unique = true),
+@ToString(callSuper = true)
+@Table(indexes = {
+        @Index(columnList = "email"),
+        @Index(columnList = "nickname"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
-
 })
 @Entity
-public class UserAccount extends AuditingFields{
+public class UserAccount extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId private UserId userId;
 
-    @Setter
-    @Column(nullable = false, length = 50)
-    private String userId;
+    @Setter @Column(nullable = false) private String userPassword;
+    @Setter @Column(nullable = false, unique = true, length = 100) private String email;
+    @Setter @Column(nullable = false, unique = true, length = 100) private String nickname;
+    @Setter private String memo;
 
-    @Column(nullable = false)
-    private String userPassword;
+    protected UserAccount() {}
 
-    @Setter
-    @Column(length = 100)
-    private String email;
-
-    @Setter
-    @Column(length = 100)
-    private String nickname;
-
-    @Setter
-    private String memo;
-
-    protected UserAccount() {
-    }
-
-    private UserAccount(String userId, String userPassword,String mail, String nickname, String memo) {
-        this.userId = userId;
+    private UserAccount(String userId, String userPassword, String email, String nickname, String memo) {
+        this.userId = UserId.of(userId);
         this.userPassword = userPassword;
-        this.email = mail;
+        this.email = email;
         this.nickname = nickname;
         this.memo = memo;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserAccount that)) return false;
-        return Objects.equals(userId, that.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId);
-    }
-
-    public static UserAccount of(String userId, String userPassword,String email, String nickname, String memo) {
+    public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
         return new UserAccount(userId, userPassword, email, nickname, memo);
     }
 
