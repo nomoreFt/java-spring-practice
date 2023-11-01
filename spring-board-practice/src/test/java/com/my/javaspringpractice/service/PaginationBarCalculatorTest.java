@@ -49,5 +49,15 @@ class PaginationBarCalculatorTest {
         );
     }
 
+    @DisplayName("BarLength의 길이를 반환한다.")
+    @Test
+    void givenBarLength_whenRequestingBarLength_thenReturnsBarLength(){
+        //given
+        PaginationBarCalculator paginationBarCalculator = PaginationBarCalculator.of(0, 0, BAR_LENGTH);
+        //when
+        int actual = paginationBarCalculator.currentBarLength();
+        //then
+        Assertions.assertThat(actual).isEqualTo(BAR_LENGTH);
+    }
 
 }

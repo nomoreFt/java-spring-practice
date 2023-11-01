@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 public class PaginationBarCalculator {
     private int currentPageNum;
     private int totalPages;
-
     private int barLength;
     protected PaginationBarCalculator() {}
 
@@ -25,5 +24,9 @@ public class PaginationBarCalculator {
         int endNumber = Math.min(startNumber + barLength, totalPages);
 
         return IntStream.range(startNumber, endNumber).boxed().toList();
+    }
+
+    public int currentBarLength(){
+        return barLength;
     }
 }

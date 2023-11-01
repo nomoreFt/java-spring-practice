@@ -14,8 +14,4 @@ public class PaginationService {
         PaginationBarCalculator paginationBarCalculator = PaginationBarCalculator.of(currentPageNum, totalPages, BAR_LENGTH);
         return paginationBarCalculator.calculatePaginationBarNumbers();
     }
-
-    public int currentBarLength() {
-        return BAR_LENGTH;
-    }
 }

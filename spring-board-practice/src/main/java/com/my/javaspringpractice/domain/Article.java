@@ -28,7 +28,7 @@ public class Article extends BaseEntity{
 
     @Setter @Column(nullable = false, length = 500) private String title;
     @Setter @Column(nullable = false, length = 5000) private String content;
-    @Setter @Column(nullable = false, length = 100) private String hashtag;
+    @Setter @Column(length = 100) private String hashtag;
 
     @Setter
     @ManyToOne(optional = false) @JoinColumn(name = "userId")
