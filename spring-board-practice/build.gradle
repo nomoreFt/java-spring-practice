@@ -39,7 +39,7 @@ dependencies {
 //UI
     //thymeleaf & thymeleaf security
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    //implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 //Util
     //lombok
