@@ -1,4 +1,6 @@
-package com.my.javaspringpractice.dto;
+package com.my.javaspringpractice.dto.response;
+
+import com.my.javaspringpractice.dto.ArticleDto;
 
 import java.time.LocalDateTime;
 

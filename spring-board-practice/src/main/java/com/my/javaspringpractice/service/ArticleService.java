@@ -1,5 +1,6 @@
 package com.my.javaspringpractice.service;
 
+import com.my.javaspringpractice.domain.UserId;
 import com.my.javaspringpractice.domain.type.SearchType;
 import com.my.javaspringpractice.dto.ArticleDto;
 import com.my.javaspringpractice.dto.ArticleWithCommentDto;
@@ -31,9 +32,22 @@ public class ArticleService {
     }
 
     public Page<ArticleDto> searchArticlesViaHashtag(String searchValue, Pageable pageable) {
+        return Page.empty();
     }
 
     public List<String> getHashTags() {
         return articleRepository.findAllDistinctHashtags();
+    }
+
+    public void saveArticle(ArticleDto dto) {
+
+    }
+
+    public void updateArticle(Long articleId, ArticleDto dto) {
+
+    }
+
+    public void deleteArticle(Long articleId, UserId userId) {
+
     }
 }

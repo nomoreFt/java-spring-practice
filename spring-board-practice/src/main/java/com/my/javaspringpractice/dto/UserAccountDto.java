@@ -24,8 +24,8 @@ public record UserAccountDto(
         return new UserAccountDto(userId, userPassword, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
 
-    public static UserAccountDto of(String userPassword, String email, String nickname, String memo) {
-        return new UserAccountDto(null, userPassword, email, nickname, memo, null, null, null, null);
+    public static UserAccountDto of(UserId userid, String userPassword, String email, String nickname, String memo) {
+        return new UserAccountDto(userid, userPassword, email, nickname, memo, null, null, null, null);
     }
 
     public static UserAccountDto from(UserAccount dto) {
