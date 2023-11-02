@@ -3,6 +3,7 @@ package com.my.javaspringpractice.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Id;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Embeddable
 public class UserId implements Serializable {
 
+    @Getter
     @Column(nullable = false, length = 100)
     private String userId;
 
