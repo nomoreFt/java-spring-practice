@@ -12,8 +12,8 @@ public class UserAccountKeyTest {
     @Test
     void givenSameUserIdAccount_whenEquals_thenEquals(){
         //given
-        UserAccount userAccount = UserAccount.of("admin", "password", "email", "nickname", "memo");
-        UserAccount userAccount2 = UserAccount.of("admin", "password2", "email", "nickname", "memo");
+        UserAccount userAccount = UserAccount.of(UserId.of("admin"), "password", "email", "nickname", "memo");
+        UserAccount userAccount2 = UserAccount.of(UserId.of("admin"), "password2", "email", "nickname", "memo");
         UserId userId = UserId.of("admin");
 
         //when

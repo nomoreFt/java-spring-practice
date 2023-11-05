@@ -41,4 +41,15 @@ public record UserAccountDto(
                 dto.getModifiedBy()
         );
     }
+
+    public UserAccount toEntity() {
+        return UserAccount.of(
+                userId,
+                userPassword,
+                email,
+                nickname,
+                memo
+        );
+    }
+
 }

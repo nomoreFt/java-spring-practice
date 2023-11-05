@@ -3,6 +3,7 @@ package com.my.javaspringpractice.repository;
 import com.my.javaspringpractice.config.TestJpaConfig;
 import com.my.javaspringpractice.domain.Article;
 import com.my.javaspringpractice.domain.UserAccount;
+import com.my.javaspringpractice.domain.UserId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ class ArticleRepositoryTest {
         Iterable<Article> all = articleRepository.findAll();
         assertThat(all).isNotNull();
 
-        UserAccount userAccount = UserAccount.of("unoTest", "pw", "email", "name", "memo");
+        UserAccount userAccount = UserAccount.of(UserId.of("unoTest"), "pw", "email", "name", "memo");
         UserAccount save = userAccountRepository.save(userAccount);
         assertThat(save).isNotNull();
         assertThat(save.getUserId()).isEqualTo(userAccount.getUserId());

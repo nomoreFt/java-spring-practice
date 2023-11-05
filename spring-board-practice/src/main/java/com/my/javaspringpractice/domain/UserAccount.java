@@ -28,15 +28,15 @@ public class UserAccount extends BaseEntity{
 
     protected UserAccount() {}
 
-    private UserAccount(String userId, String userPassword, String email, String nickname, String memo) {
-        this.userId = UserId.of(userId);
+    private UserAccount(UserId userId, String userPassword, String email, String nickname, String memo) {
+        this.userId = userId;
         this.userPassword = userPassword;
         this.email = email;
         this.nickname = nickname;
         this.memo = memo;
     }
 
-    public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
+    public static UserAccount of(UserId userId, String userPassword, String email, String nickname, String memo) {
         return new UserAccount(userId, userPassword, email, nickname, memo);
     }
 
