@@ -2,6 +2,7 @@ package com.my.javaspringpractice.repository;
 
 import com.my.javaspringpractice.domain.ArticleComment;
 import com.my.javaspringpractice.domain.QArticleComment;
+import com.my.javaspringpractice.domain.UserId;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,5 +29,5 @@ public interface ArticleCommentRepository extends
     }
 
     List<ArticleComment> findByArticle_Id(Long articleId);
-    void deleteByIdAndUserAccount_UserId(Long articleCommentId, String userId);
+    void deleteByIdAndUserAccount_UserId(Long articleCommentId, UserId userId);
 }

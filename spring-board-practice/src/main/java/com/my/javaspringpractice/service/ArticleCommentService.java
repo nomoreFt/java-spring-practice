@@ -3,6 +3,7 @@ package com.my.javaspringpractice.service;
 import com.my.javaspringpractice.domain.Article;
 import com.my.javaspringpractice.domain.ArticleComment;
 import com.my.javaspringpractice.domain.UserAccount;
+import com.my.javaspringpractice.domain.UserId;
 import com.my.javaspringpractice.dto.ArticleCommentDto;
 import com.my.javaspringpractice.repository.ArticleCommentRepository;
 import com.my.javaspringpractice.repository.ArticleRepository;
@@ -53,7 +54,7 @@ public class ArticleCommentService {
     }
 
     public void deleteArticleComment(Long articleCommentId, String userId) {
-        articleCommentRepository.deleteByIdAndUserAccount_UserId(articleCommentId, userId);
+        articleCommentRepository.deleteByIdAndUserAccount_UserId(articleCommentId, UserId.of(userId));
     }
 
 }
