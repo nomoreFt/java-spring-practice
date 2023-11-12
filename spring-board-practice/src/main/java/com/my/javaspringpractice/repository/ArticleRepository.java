@@ -5,6 +5,7 @@ import com.my.javaspringpractice.domain.QArticle;
 import com.my.javaspringpractice.repository.querydsl.ArticleQuerydslRepository;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,16 +14,26 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@PreAuthorize("hasRole('USER')")
+@RepositoryRestResource
 public interface ArticleRepository extends
         JpaRepository<Article,Long>,
         ArticleQuerydslRepository,
         QuerydslPredicateExecutor<Article>,
         QuerydslBinderCustomizer<QArticle> {
+
+    @Override
+    @PreAuthorize("hasRole('ADMIN')")
+    long count();
+
+    @PreAuthorize("hasRole('ADMIN')")
     Page<Article> findByTitleContaining(String searchKeyword, Pageable pageable);
 
     Page<Article> findByContentContaining(String searchKeyword, Pageable pageable);
